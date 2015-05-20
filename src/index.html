@@ -1,21 +1,62 @@
 <!doctype html>
 <html>
 <head>
-<script type="text/javascript">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Flickr App</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="robots" content="index, follow, noarchive">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="HandheldFriendly"           content="true"/>
+        <meta name="apple-touch-fullscreen"     content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
 
-        ​(​function​​()​{ ​function​cb​(​data​)​{
+        <!-- build:css css/flickr.min.css -->
+        <link rel="stylesheet" type="text/css" href="css/normalize.css"/>
+        <link rel="stylesheet" type="text/css" href="css/base.css"/>
+        <link rel="stylesheet" type="text/css" href="css/flickr.css"/>
 
-        //usereturneddata
+        <link rel='stylesheet' type="text/css" href='css/desktop.css'/>
+        <!-- endbuild -->
 
-        }
-        ​var​tags ​=​​'london';
-        ​var​script ​=​document​.​createElement(​​'script'​);
-        script​.​src ​= 'http://api.flickr.com/services/feeds/photos_public.gne?format=json&jsoncallback=cb&tag s='​​+​tags;
-        document​.​head​.​appendChild​(​script​); ​
-    })();
+        <!-- build:js vendor.min.js -->
+        <script src="js/libs/handlebars.runtime.js"></script>
+        <!-- endbuild -->
 
-​</script>
+
+        <script type​=​"text/javascript">
+
+
+                (function () {
+                        //had to be modified in order to be globally accessible
+                        window.cb = function (data) {
+                                var container = document.getElementById('flickr');
+                                Flickr.init(container, data);
+                        };
+
+                        var tags = 'london';
+                        var script = document.createElement('script');
+
+                        script.src = 'http://api.flickr.com/services/feeds/photos_public.gne?format=json&jsoncallback=cb&tag s=' + tags;
+                        document.head.appendChild(script);
+                })();
+        </script>
 </head>
 <body>
+
+<div class="header">
+        <div class="title">Flickr images of London</div>
+</div>
+<div id="flickr" class="container">
+        <div class="loader">Loading...</div>
+</div>
+
+<!-- build:js flickr.min.js -->
+<script src="js/Flickr.js"></script>
+<script src="js/templates/templates.js"></script>
+<script src="js/utils/utils.js"></script>
+<!-- endbuild -->
+
 </body>
 </html>

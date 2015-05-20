@@ -1,1 +1,5 @@
-<div> Flicker images </div>
+<div class="images__container">
+    {{#each items}}
+    <img class="flickr__image {{#if selected}}selected{{/if}}" src="{{media.m}}" alt="" data-link="{{link}}"/>
+    {{/each}}
+</div>
