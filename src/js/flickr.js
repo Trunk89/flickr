@@ -4,7 +4,8 @@ var Flickr = Flickr || {};
     'use strict';
 
     var pageData,
-        pageContainer;
+        pageContainer,
+        STORAGE_VARIABLE = 'links';
 
     Flickr.init = function (container, data) {
         pageData = data;
@@ -15,7 +16,7 @@ var Flickr = Flickr || {};
 
     Flickr.render = function () {
         pageData.items = this.loadSelectedFromSessionStorage(pageData.items);
-        console.log(pageData);
+
         var div = Flickr.Utils.renderTemplate('flickr_page', pageData, true);
         pageContainer.innerHTML = "";
         pageContainer.appendChild(div);
@@ -49,19 +50,19 @@ var Flickr = Flickr || {};
         //don't have to worry about older browsers as it's only for chrome
         elem.classList.remove('selected');
 
-        Flickr.Utils.storage.removeFromArray('links', elem.getAttribute('data-link'));
+        Flickr.Utils.storage.removeFromArray(STORAGE_VARIABLE, elem.getAttribute('data-link'));
 
     };
 
     Flickr.selectPhoto = function (elem) {
         elem.classList.add('selected');
 
-        Flickr.Utils.storage.addToArray('links', elem.getAttribute('data-link'));
+        Flickr.Utils.storage.addToArray(STORAGE_VARIABLE, elem.getAttribute('data-link'));
     };
 
     Flickr.loadSelectedFromSessionStorage = function (items) {
         var itemsLength = items.length,
-            sessionItems = Flickr.Utils.storage.getArray('links');
+            sessionItems = Flickr.Utils.storage.getArray(STORAGE_VARIABLE);
 
         for (var i=0; i<itemsLength; i++) {
             var item = items[i],
@@ -70,6 +71,10 @@ var Flickr = Flickr || {};
             if (index > -1) {
                 items[i].selected = true;
             }
+        }
+
+        if (Flickr.Utils.storage.getArrayLength(STORAGE_VARIABLE) > 250) {
+            Flickr.Utils.storage.removeOldestFromArray(STORAGE_VARIABLE);
         }
 
         return items;
