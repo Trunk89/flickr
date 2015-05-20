@@ -136,15 +136,17 @@ module.exports = function (grunt) {
         },
         jasmine: {
             min: {
-                src: 'release/js/*.min.js',
+                src: 'min/js/*.flickr.min.js',
                 options: {
-                    specs: 'test/unit/**/*Spec.js'
+                    specs: 'test/unit/**/*Spec.js',
+                    vendor: ['min/js/*.vendor.min.js']
                 }
             },
             dev: {
-                src: ['src/js/libs/handlebars.runtime.js', 'src/js/flickr.js, src/js/utils/utils.js', 'src/js/templates/templates.js'],
+                src: ['src/js/*.js, src/js/utils/*.js', 'src/js/templates/*.js'],
                 options: {
-                    specs: 'test/unit/**/*Spec.js'
+                    specs: 'test/unit/**/*Spec.js',
+                    vendor: ['src/js/libs/handlebars.runtime.js']
                 }
             }
 
