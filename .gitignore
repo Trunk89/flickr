@@ -1,0 +1,5 @@
+min/
+node_modules/
+temp/
+src/js/templates/
+.idea/
