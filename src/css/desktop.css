@@ -1,0 +1,8 @@
+/* View for tablets and desktop */
+@media (min-width: 768px) {
+    .images__container .flickr__image {
+        max-width: 45%;
+        max-height: 135px;
+        margin: 5px;
+    }
+}
